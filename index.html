@@ -4,43 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MixxiBooster Elite // Ultimate Gaming Suite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #07070B;
-            --panel-bg: #0D0D14;
-            --card-bg: #12121A;
-            --card-hover: #1A1A26;
+            --bg-deep: #030307;
+            --bg-card: rgba(18, 18, 26, 0.7);
+            --bg-card-hover: rgba(28, 28, 42, 0.85);
             --neon-orange: #FF5500;
-            --neon-glow: rgba(255, 85, 0, 0.5);
+            --neon-orange-glow: rgba(255, 85, 0, 0.35);
+            --accent-cyan: #00F0FF;
             --text-main: #FFFFFF;
-            --text-muted: #8F8FA8;
-            --border-subtle: #1F1F2E;
+            --text-muted: #9494B8;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-orange: rgba(255, 85, 0, 0.4);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-deep);
             color: var(--text-main);
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* ФОНОВЫЕ СВЕТОВЫЕ ЭФФЕКТЫ */
-        .bg-glow {
+        /* ФОНОВЫЕ СВЕТОВЫЕ АТМОСФЕРНЫЕ ЭФФЕКТЫ */
+        .ambient-glow {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 85, 0, 0.12) 0%, transparent 70%);
-            top: -100px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255, 85, 0, 0.15) 0%, rgba(0, 240, 255, 0.03) 50%, transparent 70%);
+            top: -150px;
             left: 50%;
             transform: translateX(-50%);
+            z-index: -2;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -1;
             pointer-events: none;
         }
@@ -51,63 +67,67 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 75px;
-            background: rgba(7, 7, 11, 0.8);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-subtle);
+            height: 80px;
+            background: rgba(3, 3, 7, 0.75);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 50px;
+            padding: 0 60px;
             z-index: 1000;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-weight: 800;
-            font-size: 18px;
-            letter-spacing: 0.5px;
+            font-size: 19px;
+            letter-spacing: -0.5px;
             cursor: pointer;
         }
 
         .logo-icon {
-            background: var(--neon-orange);
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--neon-orange), #ff8833);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 0 15px var(--neon-glow);
-            animation: pulse-logo 2s infinite alternate;
+            font-size: 20px;
+            box-shadow: 0 0 20px var(--neon-orange-glow);
+            animation: pulse-logo 3s infinite alternate;
         }
 
         @keyframes pulse-logo {
-            0% { box-shadow: 0 0 10px rgba(255, 85, 0, 0.4); }
-            100% { box-shadow: 0 0 25px rgba(255, 85, 0, 0.8); }
+            0% { box-shadow: 0 0 10px rgba(255, 85, 0, 0.3); transform: scale(1); }
+            100% { box-shadow: 0 0 25px rgba(255, 85, 0, 0.7); transform: scale(1.05); }
         }
 
         .logo span {
             color: var(--neon-orange);
-            font-weight: 500;
-            font-size: 13px;
+            font-weight: 600;
+            font-size: 12px;
+            background: rgba(255, 85, 0, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-orange);
         }
 
         nav {
             display: flex;
             align-items: center;
+            gap: 35px;
         }
 
         nav a {
             color: var(--text-muted);
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            transition: color 0.2s;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
@@ -115,22 +135,22 @@
         }
 
         .cta-nav {
-            background: var(--neon-orange);
+            background: linear-gradient(135deg, var(--neon-orange), #e64d00);
             color: white;
-            padding: 10px 24px;
-            border-radius: 10px;
+            padding: 12px 26px;
+            border-radius: 12px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 0 20px rgba(255, 85, 0, 0.4);
+            box-shadow: 0 4px 20px rgba(255, 85, 0, 0.4);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .cta-nav:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 35px rgba(255, 85, 0, 0.8);
+            box-shadow: 0 6px 30px rgba(255, 85, 0, 0.6);
         }
 
-        /* ГЛАВНЫЙ ЭКРАН (HERO) */
+        /* HERO СЕКЦИЯ */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -138,114 +158,149 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px 60px;
+            padding: 160px 20px 80px;
             position: relative;
         }
 
         .badge {
-            background: rgba(255, 85, 0, 0.1);
-            border: 1px solid rgba(255, 85, 0, 0.3);
+            background: rgba(255, 85, 0, 0.08);
+            border: 1px solid var(--border-orange);
             color: var(--neon-orange);
-            padding: 6px 18px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 30px;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 25px;
-            animation: fadeInDown 0.8s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-            font-size: 64px;
-            font-weight: 900;
-            max-width: 950px;
-            line-height: 1.05;
+            font-size: 68px;
+            font-weight: 800;
+            max-width: 1000px;
+            line-height: 1.1;
             margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease 0.2s both;
+            letter-spacing: -1.5px;
         }
 
         .hero h1 span {
-            color: var(--neon-orange);
-            text-shadow: 0 0 40px rgba(255, 85, 0, 0.4);
+            background: linear-gradient(135deg, #FF5500, #FF9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(255, 85, 0, 0.3);
         }
 
         .hero p {
             color: var(--text-muted);
-            font-size: 18px;
-            max-width: 650px;
+            font-size: 19px;
+            max-width: 680px;
             margin-bottom: 45px;
             line-height: 1.6;
-            animation: fadeInUp 0.8s ease 0.4s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 20px;
-            animation: fadeInUp 0.8s ease 0.6s both;
         }
 
         .btn-primary {
-            background: var(--neon-orange);
+            background: linear-gradient(135deg, var(--neon-orange), #e64d00);
             color: white;
-            padding: 18px 40px;
-            border-radius: 14px;
-            font-weight: 800;
+            padding: 18px 42px;
+            border-radius: 16px;
+            font-weight: 700;
             text-decoration: none;
             font-size: 16px;
-            box-shadow: 0 0 35px rgba(255, 85, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 85, 0, 0.4);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             border: none;
             cursor: pointer;
         }
 
         .btn-primary:hover {
             transform: translateY(-4px);
-            box-shadow: 0 0 50px rgba(255, 85, 0, 0.8);
+            box-shadow: 0 15px 40px rgba(255, 85, 0, 0.6);
         }
 
         .btn-secondary {
-            background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
             color: white;
-            padding: 18px 40px;
-            border-radius: 14px;
+            padding: 18px 42px;
+            border-radius: 16px;
             font-weight: 700;
             text-decoration: none;
             font-size: 16px;
+            backdrop-filter: blur(10px);
             transition: all 0.3s;
         }
 
         .btn-secondary:hover {
-            background: var(--card-hover);
-            border-color: var(--neon-orange);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--border-orange);
             transform: translateY(-4px);
         }
 
-        /* СЕКЦИЯ ОСОБЕННОСТЕЙ */
-        .features {
-            padding: 120px 50px;
-            max-width: 1200px;
+        /* СТАТИСТИКА */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 90px;
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 35px 0;
+            width: 100%;
+            background: rgba(13, 13, 20, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF5500, #FF9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ОБЩИЕ СЕКЦИИ */
+        section {
+            padding: 140px 50px;
+            max-width: 1240px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 800;
             margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .section-subtitle {
             text-align: center;
             color: var(--text-muted);
-            font-size: 16px;
-            margin-bottom: 60px;
+            font-size: 17px;
+            margin-bottom: 70px;
         }
 
+        /* СЕТКА ФИЧ (ГЛАССМОРФИЗМ) */
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -253,13 +308,14 @@
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 40px 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 45px 35px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(15px);
         }
 
         .card::before {
@@ -275,10 +331,10 @@
         }
 
         .card:hover {
-            border-color: rgba(255, 85, 0, 0.5);
+            border-color: var(--border-orange);
             transform: translateY(-8px);
-            background: var(--card-hover);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 85, 0, 0.15);
+            background: var(--bg-card-hover);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 85, 0, 0.12);
         }
 
         .card:hover::before {
@@ -286,16 +342,17 @@
         }
 
         .card-icon {
-            font-size: 36px;
+            font-size: 32px;
             margin-bottom: 25px;
             background: rgba(255, 85, 0, 0.1);
-            width: 70px;
-            height: 70px;
-            border-radius: 16px;
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255, 85, 0, 0.2);
+            border: 1px solid var(--border-orange);
+            box-shadow: inset 0 0 15px rgba(255, 85, 0, 0.1);
         }
 
         .card h3 {
@@ -310,14 +367,113 @@
             line-height: 1.6;
         }
 
+        /* КАЛЬКУЛЯТОР FPS */
+        .calc-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 55px;
+            max-width: 850px;
+            margin: 0 auto;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        .calc-group {
+            margin-bottom: 30px;
+        }
+
+        .calc-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #E2E2F0;
+        }
+
+        .calc-group select {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid var(--border-glass);
+            color: white;
+            border-radius: 14px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .calc-group select:focus {
+            border-color: var(--neon-orange);
+        }
+
+        .calc-result {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 85, 0, 0.06);
+            border: 1px solid var(--border-orange);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .calc-result h4 {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calc-result span {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF5500, #FF9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(15px);
+            transition: border-color 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-orange);
+        }
+
+        .faq-item h4 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
         /* ФУТЕР */
         footer {
-            border-top: 1px solid var(--border-subtle);
-            padding: 50px;
+            border-top: 1px solid var(--border-glass);
+            padding: 60px 50px;
             text-align: center;
             color: var(--text-muted);
             font-size: 14px;
-            background: rgba(5, 5, 8, 0.5);
+            background: rgba(3, 3, 7, 0.9);
+            backdrop-filter: blur(20px);
         }
 
         footer span {
@@ -325,98 +481,170 @@
             font-weight: 600;
         }
 
-        /* АНИМАЦИИ */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @media (max-width: 900px) {
             .grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 38px; }
+            .hero h1 { font-size: 40px; }
             header { padding: 0 20px; }
+            .stats-bar { flex-direction: column; gap: 25px; align-items: center; }
             .hero-buttons { flex-direction: column; width: 100%; }
-            .btn-primary, .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div class="ambient-glow"></div>
+    <div class="grid-pattern"></div>
 
     <!-- НАВИГАЦИЯ -->
     <header>
         <div class="logo" onclick="window.scrollTo(0,0)">
             <div class="logo-icon">⚡</div>
-            MIXXIBOOSTER <span>// ELITE</span>
+            MIXXIBOOSTER <span>ELITE</span>
         </div>
         <nav>
             <a href="#features">Возможности</a>
-            <a href="#about">О нас</a>
-            <!-- Прямая ссылка на скачивание -->
+            <a href="#calculator">Калькулятор FPS</a>
+            <a href="#faq">FAQ</a>
             <a href="https://raw.githubusercontent.com/geimatveit-create/MixxiBooster/main/MixxiBooster.exe" class="cta-nav">СКАЧАТЬ v5.2</a>
         </nav>
     </header>
 
-    <!-- ГЛАВНЫЙ БЛОК -->
+    <!-- HERO СЕКЦИЯ -->
     <section class="hero">
-        <div class="badge">🔥 Новая версия 5.2 доступна</div>
+        <div class="badge">🔥 Новая версия 5.2 уже доступна</div>
         <h1>Ускорь свой ПК и подними FPS <span>до абсолютного максимума</span></h1>
         <p>Элитный игровой комплекс для глубокой очистки системы, разгона процессора, мгновенного высвобождения памяти и радикального снижения пинга.</p>
         <div class="hero-buttons">
-            <!-- Прямая ссылка на скачивание главной кнопки -->
             <a href="https://raw.githubusercontent.com/geimatveit-create/MixxiBooster/main/MixxiBooster.exe" class="btn-primary">
                 <span>⚡ СКАЧАТЬ ДЛЯ WINDOWS</span>
             </a>
             <a href="#features" class="btn-secondary">УЗНАТЬ БОЛЬШЕ</a>
         </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <h3>+35 FPS</h3>
+                <p>Средний прирост в играх</p>
+            </div>
+            <div class="stat-item">
+                <h3>15+</h3>
+                <p>Мощных твиков ОС</p>
+            </div>
+            <div class="stat-item">
+                <h3>0%</h3>
+                <p>Нагрузки в фоновом режиме</p>
+            </div>
+        </div>
     </section>
 
-    <!-- СЕКЦИЯ ПРЕИМУЩЕСТВ -->
-    <section class="features" id="features">
-        <h2 class="section-title">Почему выбирают нас</h2>
-        <p class="section-subtitle">Максимальная производительность вашего железа без компромиссов</p>
+    <!-- ВОЗМОЖНОСТИ -->
+    <section id="features">
+        <h2 class="section-title">Функционал Комплекса</h2>
+        <p class="section-subtitle">Всё необходимое для выдачи максимального потенциала вашего железа</p>
         
         <div class="grid">
             <div class="card">
                 <div class="card-icon">🚀</div>
-                <h3>Игровые Профили</h3>
-                <p>Мгновенное перераспределение ядер процессора и очистка ОЗУ под CS2, Dota 2, Cyberpunk 2077 в один клик.</p>
+                <h3>Игровой Режим Pro</h3>
+                <p>Принудительно переводит процессор в режим максимальной производительности и приостанавливает фоновые службы Windows.</p>
             </div>
             <div class="card">
-                <div class="card-icon">⚙️</div>
-                <h3>Каталог Твиков ОС</h3>
-                <p>Более 15 мощных системных оптимизаций реестра, отключение телеметрии и разгон SSD без лишнего софта.</p>
+                <div class="card-icon">🧹</div>
+                <h3>Очистка ОЗУ</h3>
+                <p>Интеллектуальная очистка оперативной памяти от мусора и утечек памяти перед запуском тяжелых проектов.</p>
             </div>
             <div class="card">
                 <div class="card-icon">🌐</div>
                 <h3>Сетевой Бустер</h3>
-                <p>Сброс кэша DNS, оптимизация стека TCP/IP и устранение скачков пинга в онлайн-играх.</p>
+                <p>Оптимизация параметров TCP/IP, очистка кэша DNS для снижения пинга и устранения лагов.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h3>Твикер Системы</h3>
+                <p>Безопасное отключение телеметрии, ускорение отзывчивости проводника и оптимизация работы SSD дисков.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌡️</div>
+                <h3>Мониторинг железа</h3>
+                <p>Контроль температуры процессора, видеокарты и загруженности комплектующих в реальном времени.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Безопасность</h3>
+                <p>Все оптимизации проводятся через стандартные API Windows с возможностью отката изменений в один клик.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАЛЬКУЛЯТОР FPS -->
+    <section id="calculator">
+        <h2 class="section-title">Калькулятор Прироста FPS</h2>
+        <p class="section-subtitle">Узнайте примерный буст производительности для вашей системы</p>
+
+        <div class="calc-box">
+            <div class="calc-group">
+                <label>Ваша текущая видеокарта:</label>
+                <select id="gpuSelect" onchange="calculateFPS()">
+                    <option value="15">Начальный уровень (GTX 1050 / RX 560 и ниже)</option>
+                    <option value="25" selected>Средний уровень (RTX 2060 / GTX 1660 / RX 6600)</option>
+                    <option value="40">Высокий уровень (RTX 3070 / 4060 / RX 7700 XT)</option>
+                    <option value="55">Элитный сегмент (RTX 4080 / 4090)</option>
+                </select>
+            </div>
+
+            <div class="calc-group">
+                <label>Объем оперативной памяти (ОЗУ):</label>
+                <select id="ramSelect" onchange="calculateFPS()">
+                    <option value="10">8 ГБ</option>
+                    <option value="25" selected>16 ГБ</option>
+                    <option value="40">32 ГБ и более</option>
+                </select>
+            </div>
+
+            <div class="calc-result">
+                <h4>Прогнозируемый прирост кадров:</h4>
+                <span id="fpsOutput">+35 - 50 FPS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+        <p class="section-subtitle">Ответы на популярные вопросы о работе MixxiBooster</p>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <h4>Безопасно ли использовать программу?</h4>
+                <p>Да, абсолютно. Все твики используют только легитимные настройки реестра и системные команды Windows без стороннего сомнительного ПО.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Можно ли откатить изменения назад?</h4>
+                <p>Конечно. В программе предусмотрена точка восстановления и кнопка сброса всех твиков к стандартным параметрам Windows.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Требуются ли права администратора?</h4>
+                <p>Да, так как программа вносит изменения в системные службы, планировщик задач и реестр Windows, для ее работы необходим запуск от имени администратора.</p>
             </div>
         </div>
     </section>
 
     <!-- ФУТЕР -->
-    <footer id="about">
+    <footer>
         <p>&copy; 2026 <span>MixxiTeam Corp</span>. Все права защищены. Elite Gaming Suite v5.2.</p>
     </footer>
+
+    <!-- СКРИПТ КАЛЬКУЛЯТОРА -->
+    <script>
+        function calculateFPS() {
+            const gpu = parseInt(document.getElementById('gpuSelect').value);
+            const ram = parseInt(document.getElementById('ramSelect').value);
+            const totalBoost = gpu + ram;
+            
+            document.getElementById('fpsOutput').innerText = `+${totalBoost} - ${totalBoost + 15} FPS`;
+        }
+    </script>
 
 </body>
 </html>
